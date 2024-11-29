@@ -1,9 +1,11 @@
 package com.aluracursos.desafio2.principal;
 
+import com.aluracursos.desafio2.model.DatosCancion;
 import com.aluracursos.desafio2.model.DatosCantante;
 import com.aluracursos.desafio2.model.TipoCantante;
 import com.aluracursos.desafio2.repository.DatosCantanteRepository;
 
+import java.util.Optional;
 import java.util.Scanner;
 
 public class Principal {
@@ -33,9 +35,9 @@ public class Principal {
                 case 1:
                     registraCantantes();
                     break;
-//                case 2:
-//                    registraCanciones();
-//                    break;
+                case 2:
+                    registraCanciones();
+                    break;
 //                case 3:
 //                    BuscarCancionesPorCantante();
 //                    break;
@@ -66,6 +68,23 @@ public class Principal {
                 nuevo = teclado.nextLine();
             }
         }
+
+    private void registraCanciones() {
+        System.out.println("De cual cantante deseas registrar la canción: ");
+        var nombre = teclado.nextLine();
+        Optional<DatosCantante> cantante = repositorio.findByNombreContainingIgnoreCase(nombre);
+
+            if(cantante.isPresent()){
+                System.out.println("Titulo de la canción: ");
+                var nombreCancion = teclado.nextLine();
+                DatosCancion cancion = new DatosCancion(nombreCancion);
+                cancion.setCantante(cantante.get());
+                cantante.get().getCanciones().add(cancion);
+                repositorio.save(cantante.get());
+            }else{
+                System.out.println("Cantante no encontrado");
+            }
+    }
 
 
 }
