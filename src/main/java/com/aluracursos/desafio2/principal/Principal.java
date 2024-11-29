@@ -5,6 +5,7 @@ import com.aluracursos.desafio2.model.DatosCantante;
 import com.aluracursos.desafio2.model.TipoCantante;
 import com.aluracursos.desafio2.repository.DatosCantanteRepository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -38,9 +39,9 @@ public class Principal {
                 case 2:
                     registraCanciones();
                     break;
-//                case 3:
-//                    BuscarCancionesPorCantante();
-//                    break;
+                case 3:
+                    BuscarCancionesPorCantante();
+                    break;
 //                case 4:
 //                    obtenerInfoCantante();
 //                    break;
@@ -86,5 +87,11 @@ public class Principal {
             }
     }
 
+    private void BuscarCancionesPorCantante() {
+        System.out.println("Nombra el cantante que deseas ver sus canciones: ");
+        var nombre = teclado.nextLine();
+        List<DatosCancion> canciones = repositorio.BuscarCancionesPorCantante(nombre);
+        canciones.forEach(System.out::println);
+    }
 
 }
