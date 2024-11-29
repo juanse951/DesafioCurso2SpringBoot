@@ -4,6 +4,7 @@ import com.aluracursos.desafio2.model.DatosCancion;
 import com.aluracursos.desafio2.model.DatosCantante;
 import com.aluracursos.desafio2.model.TipoCantante;
 import com.aluracursos.desafio2.repository.DatosCantanteRepository;
+import com.aluracursos.desafio2.service.ConsultaChatGPT;
 
 import java.util.List;
 import java.util.Optional;
@@ -42,9 +43,9 @@ public class Principal {
                 case 3:
                     BuscarCancionesPorCantante();
                     break;
-//                case 4:
-//                    obtenerInfoCantante();
-//                    break;
+                case 4:
+                    obtenerInfoCantante();
+                    break;
                 case 0:
                     System.out.println("Cerrando la aplicación...");
                     break;
@@ -92,6 +93,13 @@ public class Principal {
         var nombre = teclado.nextLine();
         List<DatosCancion> canciones = repositorio.BuscarCancionesPorCantante(nombre);
         canciones.forEach(System.out::println);
+    }
+
+    private void obtenerInfoCantante() {
+        System.out.println("Nombra el cantante para buscar datos sobre el ");
+        var nombre = teclado.nextLine();
+        var respuesta = ConsultaChatGPT.obtenerDatosCantante(nombre);
+        System.out.println(respuesta.trim());
     }
 
 }
