@@ -26,6 +26,7 @@ public class Principal {
                     2 - Registrar datos de canciones
                     3 - Buscar canciones por cantantes
                     4 - Obtener información sobre un cantante
+                    5 - Lista de canciones
                     
                     0 - Salir
                     """;
@@ -45,6 +46,9 @@ public class Principal {
                     break;
                 case 4:
                     obtenerInfoCantante();
+                    break;
+                case 5:
+                    listarCanciones();
                     break;
                 case 0:
                     System.out.println("Cerrando la aplicación...");
@@ -100,6 +104,11 @@ public class Principal {
         var nombre = teclado.nextLine();
         var respuesta = ConsultaChatGPT.obtenerDatosCantante(nombre);
         System.out.println(respuesta.trim());
+    }
+
+    private void listarCanciones() {
+        List<DatosCantante> cantantes = repositorio.findAll();
+        cantantes.forEach(c-> c.getCanciones().forEach(System.out::println));
     }
 
 }
