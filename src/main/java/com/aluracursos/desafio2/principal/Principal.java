@@ -1,9 +1,16 @@
 package com.aluracursos.desafio2.principal;
 
+import com.aluracursos.desafio2.repository.DatosCantanteRepository;
+
 import java.util.Scanner;
 
 public class Principal {
     private Scanner teclado = new Scanner(System.in);
+    private DatosCantanteRepository repositorio;
+
+    public Principal(DatosCantanteRepository repository) {
+        this.repositorio = repository;
+    }
 
     public void muestraElMenu(){
         var opcion = -1;
