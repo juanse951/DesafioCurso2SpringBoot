@@ -1,5 +1,7 @@
 package com.aluracursos.desafio2.principal;
 
+import com.aluracursos.desafio2.model.DatosCantante;
+import com.aluracursos.desafio2.model.TipoCantante;
 import com.aluracursos.desafio2.repository.DatosCantanteRepository;
 
 import java.util.Scanner;
@@ -27,10 +29,10 @@ public class Principal {
             opcion = teclado.nextInt();
             teclado.nextLine();
 
-//            switch (opcion) {
-//                case 1:
-//                    registraCantantes();
-//                    break;
+            switch (opcion) {
+                case 1:
+                    registraCantantes();
+                    break;
 //                case 2:
 //                    registraCanciones();
 //                    break;
@@ -40,12 +42,30 @@ public class Principal {
 //                case 4:
 //                    obtenerInfoCantante();
 //                    break;
-//                case 0:
-//                    System.out.println("Cerrando la aplicación...");
-//                    break;
-//                default:
-//                    System.out.println("Opción inválida");
+                case 0:
+                    System.out.println("Cerrando la aplicación...");
+                    break;
+                default:
+                    System.out.println("Opción inválida");
+            }
+        }
+    }
+
+    private void registraCantantes() {
+            var nuevo = "S";
+
+            while (nuevo.equalsIgnoreCase("s")){
+                System.out.println("Nombre del cantante: ");
+                var nombre = teclado.nextLine();
+                System.out.println("Que tipo de artista es (solo, due, banda); ");
+                var tipo = teclado.nextLine();
+                TipoCantante tipoCantante = TipoCantante.valueOf(tipo.toUpperCase());
+                DatosCantante cantante = new DatosCantante(nombre,tipoCantante);
+                repositorio.save(cantante);
+                System.out.println("Registrar un nuevo cantante? (S/N)");
+                nuevo = teclado.nextLine();
             }
         }
 
-    }
+
+}
